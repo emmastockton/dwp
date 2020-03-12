@@ -6,6 +6,8 @@ Author: Emma Stockton
 
 - NodeJS (12)
 
+Supports [nvm](https://github.com/nvm-sh/nvm), e.g. `nvm use`
+
 ## Setup
 
 ```
