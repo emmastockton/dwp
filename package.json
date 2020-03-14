@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "test:mutation": "stryker run",
     "start": "node index.js",
     "lint": "eslint \"**/*.js\"",
