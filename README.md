@@ -2,6 +2,18 @@
 
 Author: Emma Stockton
 
+Hosted on Heroku at https://emma-stockton-dwp.herokuapp.com/
+
+## Endpoints
+
+### `GET /`
+
+Status endpoint (returns 200 OK)
+
+### `GET /users`
+
+Returns a list of users who are either listed as living in London or whose location is within 50 miles of London
+
 ## Requirements
 
 - NodeJS (12)
@@ -24,6 +36,26 @@ Use the `PORT` environment variable to customise which port the service runs on,
 
 ## Run Tests
 
+Run the unit tests:
+
 ```
 npm test
+```
+
+Run mutation tests:
+
+```
+npm run test:mutation
+```
+
+## Linting
+
+```
+npm run lint
+```
+
+## Format using Prettier
+
+```
+npm run prettify
 ```
