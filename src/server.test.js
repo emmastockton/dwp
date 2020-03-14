@@ -6,10 +6,18 @@ const { getUsers } = require("./bpdts");
 
 jest.mock("./bpdts");
 
+test("server implements strict routing", () => {
+  jest.resetModules();
+  const express = require("express");
+  const spy = jest.spyOn(express, "Router");
+  require("./server");
+  expect(spy).toHaveBeenCalledWith({ strict: true });
+});
+
 test("server returns a 200 response", () => {
   return request(server)
     .get("/")
-    .expect(200);
+    .expect(200, "Ok");
 });
 
 test("the /users endpoint returns an array of users", () => {

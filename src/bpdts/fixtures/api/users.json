@@ -52,5 +52,23 @@
     "ip_address": "182.189.27.66",
     "latitude": 51.5560241,
     "longitude": -0.2817075
+  },
+  {
+    "id": 999,
+    "first_name": "Exactly",
+    "last_name": "50miles",
+    "email": "ex@examplw.org",
+    "ip_address": "182.189.27.66",
+    "latitude": 52.050679,
+    "longitude": -0.894778
+  },
+  {
+    "id": 9999,
+    "first_name": "Sligtly more than",
+    "last_name": "50 miles",
+    "email": "ex@examplw.org",
+    "ip_address": "182.189.27.66",
+    "latitude": 52.051828,
+    "longitude": -0.896963
   }
 ]

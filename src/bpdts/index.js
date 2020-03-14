@@ -7,10 +7,11 @@ const LONDON = {
   latitude: 51.509865,
   longitude: -0.118092,
 };
-const DISTANCE = 50;
+const MAX_DISTANCE = 50;
 const MILES_PER_METER = 1609.344;
+const DISTANCE_ACCURACY = 1;
 
-function apiGet(path = "") {
+function apiGet(path) {
   return superagent.get(`${apiUrl}${path}`);
 }
 
@@ -29,7 +30,10 @@ async function getUsersByResidency() {
 
 async function getUsersByDistance() {
   const res = await apiGet("/users");
-  return res.body.filter(user => getDistanceFromLondon(user) <= DISTANCE);
+  return res.body.filter(user => {
+    const dist = getDistanceFromLondon(user).toFixed(DISTANCE_ACCURACY);
+    return dist <= MAX_DISTANCE;
+  });
 }
 
 async function getUsers() {

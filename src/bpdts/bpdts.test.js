@@ -1,4 +1,5 @@
 const superagent = require("superagent");
+const geolib = require("geolib");
 const { getUsers } = require(".");
 
 const fixtureCityLondonUsers = require("./fixtures/api/city-London-users.json");
@@ -6,6 +7,7 @@ const fixtureUsers = require("./fixtures/api/users.json");
 const baseUrl = "https://bpdts-test-app.herokuapp.com";
 
 jest.mock("superagent");
+jest.mock("geolib");
 
 beforeEach(() => {
   superagent.get.mockImplementation(url => {
@@ -40,12 +42,23 @@ test("returns an array of users", async () => {
 });
 
 test("return a unique list of users within a set distance of London", async () => {
-  const expectedUsersInLondon = 8;
+  const validUsers = [4, 5, 999, 135, 396, 520, 658, 688, 794];
   const users = await getUsers();
-  const uniqueUsers = new Set(users.map(({ id }) => id));
+  const userIds = users.map(({ id }) => id);
+  const uniqueUsers = new Set(userIds);
 
-  expect(users.length).toEqual(expectedUsersInLondon);
-  expect(uniqueUsers.size).toEqual(expectedUsersInLondon);
+  expect(users.length).toEqual(validUsers.length);
+  expect(uniqueUsers.size).toEqual(validUsers.length);
+  expect(userIds.sort()).toEqual(validUsers.sort());
+});
+
+test("uses the expected lat/long of London when looking up distance", async () => {
+  await getUsers();
+
+  expect(geolib.getDistance).toHaveBeenCalledWith(expect.any(Object), {
+    latitude: 51.509865,
+    longitude: -0.118092,
+  });
 });
 
 test("calls the expected api endpoints", async () => {

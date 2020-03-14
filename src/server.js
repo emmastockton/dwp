@@ -1,15 +1,19 @@
-const Express = require("express");
-const server = Express();
+const express = require("express");
+const server = express();
+
+const router = express.Router({ strict: true });
 
 const { getUsers } = require("./bpdts");
 
-server.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.send("Ok");
 });
 
-server.get("/users", async (req, res) => {
+router.get("/users", async (req, res) => {
   const users = await getUsers();
   res.send(users);
 });
+
+server.use(router);
 
 module.exports = server;
