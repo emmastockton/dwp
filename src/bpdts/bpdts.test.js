@@ -1,9 +1,10 @@
 const superagent = require("superagent");
 const geolib = require("geolib");
-const { getUsers } = require(".");
 
+const { getUsers } = require(".");
 const fixtureCityLondonUsers = require("./fixtures/api/city-London-users.json");
 const fixtureUsers = require("./fixtures/api/users.json");
+
 const baseUrl = "https://bpdts-test-app.herokuapp.com";
 
 jest.mock("superagent");
