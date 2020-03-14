@@ -5,7 +5,7 @@ const apiUrl = "https://bpdts-test-app.herokuapp.com";
 
 const LONDON = {
   latitude: 51.509865,
-  longitude: -0.118092
+  longitude: -0.118092,
 };
 const DISTANCE = 50;
 const MILES_PER_METER = 1609.344;
@@ -35,10 +35,10 @@ async function getUsersByDistance() {
 async function getUsers() {
   return [
     ...(await getUsersByResidency()),
-    ...(await getUsersByDistance())
+    ...(await getUsersByDistance()),
   ].filter(uniqueUser);
 }
 
 module.exports = {
-  getUsers
+  getUsers,
 };

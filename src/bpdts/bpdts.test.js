@@ -3,18 +3,19 @@ const { getUsers } = require(".");
 
 const fixtureCityLondonUsers = require("./fixtures/api/city-London-users.json");
 const fixtureUsers = require("./fixtures/api/users.json");
+const baseUrl = "https://bpdts-test-app.herokuapp.com";
 
 jest.mock("superagent");
 
 beforeEach(() => {
   superagent.get.mockImplementation(url => {
-    if (url === "https://bpdts-test-app.herokuapp.com/city/London/users") {
+    if (url === `${baseUrl}/city/London/users`) {
       return {
-        body: fixtureCityLondonUsers
+        body: fixtureCityLondonUsers,
       };
-    } else if (url === "https://bpdts-test-app.herokuapp.com/users") {
+    } else if (url === `${baseUrl}/users`) {
       return {
-        body: fixtureUsers
+        body: fixtureUsers,
       };
     }
   });
@@ -33,7 +34,7 @@ test("returns an array of users", async () => {
       email: expect.any(String),
       ip_address: expect.any(String),
       latitude: expect.anything(),
-      longitude: expect.anything()
+      longitude: expect.anything(),
     });
   }
 });
@@ -49,11 +50,7 @@ test("return a unique list of users within a set distance of London", async () =
 
 test("calls the expected api endpoints", async () => {
   await getUsers();
-  expect(superagent.get).toHaveBeenCalledWith(
-    "https://bpdts-test-app.herokuapp.com/city/London/users"
-  );
-  expect(superagent.get).toHaveBeenCalledWith(
-    "https://bpdts-test-app.herokuapp.com/users"
-  );
+  expect(superagent.get).toHaveBeenCalledWith(`${baseUrl}/city/London/users`);
+  expect(superagent.get).toHaveBeenCalledWith(`${baseUrl}/users`);
   expect(superagent.get).toHaveBeenCalledTimes(2);
 });
