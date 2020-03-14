@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint \"**/*.js\""
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "superagent": "^5.2.2"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
     "jest": "^25.1.0",
     "supertest": "^4.0.2"
   }

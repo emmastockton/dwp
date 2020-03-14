@@ -48,7 +48,7 @@ test("return a unique list of users within a set distance of London", async () =
 });
 
 test("calls the expected api endpoints", async () => {
-  const users = await getUsers();
+  await getUsers();
   expect(superagent.get).toHaveBeenCalledWith(
     "https://bpdts-test-app.herokuapp.com/city/London/users"
   );
