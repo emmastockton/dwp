@@ -1,17 +1,14 @@
 const Express = require("express");
 const server = Express();
 
-const { getUsersByLocation } = require("./bpdts");
-
-const location = "London";
-const distance = 50;
+const { getUsers } = require("./bpdts");
 
 server.get("/", (req, res) => {
   res.send("Ok");
 });
 
 server.get("/users", async (req, res) => {
-  const users = await getUsersByLocation(location, distance);
+  const users = await getUsers();
   res.send(users);
 });
 
