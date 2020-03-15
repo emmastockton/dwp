@@ -1,8 +1,12 @@
 # DWP
 
-Author: Emma Stockton
+👩🏻‍💻**Author:** [Emma Stockton](https://github.com/emmastockton)
 
-Hosted on Heroku at https://emma-stockton-dwp.herokuapp.com/
+🚀Hosted on Heroku at https://emma-stockton-dwp.herokuapp.com/
+
+## See also
+
+- 💡[DECISIONS.md](docs/DECISIONS.md) - a catalog of design decisions made in this repo
 
 ## Endpoints
 
