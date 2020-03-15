@@ -32,6 +32,22 @@ test("server returns a 200 response", () => {
     .expect(200, "Ok");
 });
 
+test("cache: no etag sent to client", () => {
+  return request(server)
+    .get("/")
+    .then(res => {
+      expect(res.header.etag).toBe(undefined);
+    });
+});
+
+test("cache: cache-control headers sent to client", () => {
+  return request(server)
+    .get("/")
+    .then(res => {
+      expect(res.header["cache-control"]).toEqual("public, max-age=30");
+    });
+});
+
 test("the /users endpoint returns an array of users", () => {
   getUsers.mockImplementation(() => Promise.resolve([{ foo: "bar" }]));
 

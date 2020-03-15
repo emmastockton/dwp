@@ -1,7 +1,12 @@
 const superagent = require("superagent");
+const superagentCache = require("superagent-cache");
 const geolib = require("geolib");
 
-const { apiUrl } = require("../config");
+const { apiUrl, API_CACHE_EXPIRES } = require("../config");
+
+superagentCache(superagent, {
+  defaultExpiration: API_CACHE_EXPIRES,
+});
 
 const LONDON = {
   latitude: 51.509865,

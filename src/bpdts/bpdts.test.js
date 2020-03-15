@@ -8,6 +8,7 @@ const fixtureUsers = require("./fixtures/api/users.json");
 const baseUrl = "https://bpdts-test-app.herokuapp.com";
 
 jest.mock("superagent");
+jest.mock("superagent-cache");
 jest.mock("geolib");
 
 beforeEach(() => {
@@ -23,6 +24,16 @@ beforeEach(() => {
     return {
       body: apiMocks[url],
     };
+  });
+});
+
+test("requests to upstream API are cached with an expiry", () => {
+  jest.resetModules();
+  const superagentCache = require("superagent-cache");
+  require(".");
+
+  expect(superagentCache).toHaveBeenCalledWith(expect.any(Function), {
+    defaultExpiration: 30,
   });
 });
 
