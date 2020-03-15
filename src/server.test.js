@@ -4,6 +4,8 @@ const server = require("./server");
 
 const { getUsers } = require("./bpdts");
 
+const mockMiddlewareFn = jest.fn(() => () => {});
+
 jest.mock("./bpdts");
 
 test("server implements strict routing", () => {
@@ -12,6 +14,16 @@ test("server implements strict routing", () => {
   const spy = jest.spyOn(express, "Router");
   require("./server");
   expect(spy).toHaveBeenCalledWith({ strict: true });
+});
+
+test("logging middleware is used", () => {
+  jest.resetModules();
+  jest.mock("morgan", () => mockMiddlewareFn);
+  const morgan = require("morgan");
+
+  require("./server");
+
+  expect(morgan).toHaveBeenCalledWith("tiny");
 });
 
 test("server returns a 200 response", () => {
@@ -39,5 +51,3 @@ test("the api handles errors from the upstream service", () => {
       error: "unable to get users from upstream service",
     });
 });
-
-test.todo("the upstream service times out");

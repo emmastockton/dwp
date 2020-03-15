@@ -1,9 +1,12 @@
 const express = require("express");
-const server = express();
+const morgan = require("morgan");
 
+const server = express();
 const router = express.Router({ strict: true });
 
 const { getUsers } = require("./bpdts");
+
+server.use(morgan("tiny"));
 
 router.get("/", (req, res) => {
   res.send("Ok");
