@@ -11,16 +11,18 @@ jest.mock("superagent");
 jest.mock("geolib");
 
 beforeEach(() => {
+  const apiMocks = {
+    "https://bpdts-test-app.herokuapp.com/city/London/users": fixtureCityLondonUsers,
+    "https://bpdts-test-app.herokuapp.com/users": fixtureUsers,
+  };
+
   superagent.get.mockImplementation(url => {
-    if (url === `${baseUrl}/city/London/users`) {
-      return {
-        body: fixtureCityLondonUsers,
-      };
-    } else if (url === `${baseUrl}/users`) {
-      return {
-        body: fixtureUsers,
-      };
+    if (!apiMocks[url]) {
+      throw new Error(`no mock found for ${url}`);
     }
+    return {
+      body: apiMocks[url],
+    };
   });
 });
 

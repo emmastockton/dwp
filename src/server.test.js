@@ -21,7 +21,7 @@ test("server returns a 200 response", () => {
 });
 
 test("the /users endpoint returns an array of users", () => {
-  getUsers.mockResolvedValue(Promise.resolve([{ foo: "bar" }]));
+  getUsers.mockImplementation(() => Promise.resolve([{ foo: "bar" }]));
 
   return request(server)
     .get("/users")
@@ -30,3 +30,14 @@ test("the /users endpoint returns an array of users", () => {
       expect(res.body).toEqual([{ foo: "bar" }]);
     });
 });
+
+test("the api handles errors from the upstream service", () => {
+  getUsers.mockImplementation(() => Promise.reject());
+  return request(server)
+    .get("/users")
+    .expect(500, {
+      error: "unable to get users from upstream service",
+    });
+});
+
+test.todo("the upstream service times out");

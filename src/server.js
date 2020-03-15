@@ -10,8 +10,14 @@ router.get("/", (req, res) => {
 });
 
 router.get("/users", async (req, res) => {
-  const users = await getUsers();
-  res.send(users);
+  try {
+    const users = await getUsers();
+    res.send(users);
+  } catch (e) {
+    res
+      .status(500)
+      .send({ error: "unable to get users from upstream service" });
+  }
 });
 
 server.use(router);

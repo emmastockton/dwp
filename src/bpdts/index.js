@@ -19,8 +19,10 @@ function getDistanceFromLondon({ latitude, longitude }) {
   return geolib.getDistance({ latitude, longitude }, LONDON) / MILES_PER_METER;
 }
 
-function uniqueUser(user, pos, arr) {
-  return arr.findIndex(({ id }) => user.id === id) === pos;
+function uniqueUser(userA, actualIndex, allUsers) {
+  const foundIndex = allUsers.findIndex(userB => userA.id === userB.id);
+
+  return foundIndex === actualIndex;
 }
 
 async function getUsersByResidency() {
