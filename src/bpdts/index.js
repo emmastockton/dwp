@@ -1,7 +1,7 @@
 const superagent = require("superagent");
 const geolib = require("geolib");
 
-const apiUrl = "https://bpdts-test-app.herokuapp.com";
+const { apiUrl } = require("../config");
 
 const LONDON = {
   latitude: 51.509865,
